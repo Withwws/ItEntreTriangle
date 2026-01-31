@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Triangle Classifier</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="app-container">
+        <div class="card">
+            <header class="card-header">
+                <h1>Triangle Classifier</h1>
+                <p>Enter the lengths of three sides to categorize the triangle.</p>
+            </header>
+
+            <div class="input-section">
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="side1">Side 1</label>
+                        <input type="number" id="side1" placeholder="e.g. 3" step="any">
+                    </div>
+                    <div class="input-group">
+                        <label for="side2">Side 2</label>
+                        <input type="number" id="side2" placeholder="e.g. 4" step="any">
+                    </div>
+                    <div class="input-group">
+                        <label for="side3">Side 3</label>
+                        <input type="number" id="side3" placeholder="e.g. 5" step="any">
+                    </div>
+                </div>
+                
+                <button id="btn-classify" onclick="TriangleMain()">
+                    Analyze Triangle
+                </button>
+            </div>
+
+            <div id="result-container" class="result-container hidden">
+                <div class="result-content">
+                    <div class="text-info">
+                        <span id="result-badge" class="badge">Result</span>
+                        <h2 id="triangle-type" class="result-title">Title</h2>
+                        <p id="right-angle-status" class="result-subtitle">Subtitle</p>
+                        <p id="error-msg" class="error-text"></p>
+                    </div>
+                    <div class="image-wrapper">
+                        <img id="triangle-img" src="" alt="Triangle visualization">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer-ref">
+            Based on Design Document: Triangle Classifier v1.0
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
