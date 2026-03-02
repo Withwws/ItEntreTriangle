@@ -296,3 +296,89 @@ function ShowResult(data) {
     }
   }
 }
+
+function TwoSideNumberCheck(in1, in2) {
+  if (
+    isNaN(in1) ||
+    isNaN(in2) ||
+    in1.trim() === "" ||
+    in2.trim() === ""
+  ) {
+    return {
+      isValid: false,
+      message: "Input Error: Both side fields must be numbers.",
+    };
+  }
+
+  let n1 = parseFloat(in1);
+  let n2 = parseFloat(in2);
+
+  if (n1 <= 0 || n2 <= 0) {
+    return {
+      isValid: false,
+      message: "Input Error: Values must be greater than 0.",
+    };
+  }
+
+  return { isValid: true };
+}
+
+function FormatSideValue(value) {
+  return Number(value.toFixed(4)).toString();
+}
+
+function CalculateMissingSide() {
+  const sideAInput = document.getElementById("calc-side-a").value;
+  const sideBInput = document.getElementById("calc-side-b").value;
+  const triangleType = document.getElementById("calc-type").value;
+
+  const resultContainer = document.getElementById("missing-result");
+  const resultMsg = document.getElementById("missing-msg");
+
+  const checkResult = TwoSideNumberCheck(sideAInput, sideBInput);
+  resultContainer.classList.remove("hidden", "state-success", "state-error");
+
+  if (!checkResult.isValid) {
+    resultContainer.classList.add("state-error");
+    resultMsg.innerText = checkResult.message;
+    return;
+  }
+
+  const a = parseFloat(sideAInput);
+  const b = parseFloat(sideBInput);
+  const epsilon = 0.00001;
+
+  if (triangleType === "right") {
+    const missing = Math.sqrt(a ** 2 + b ** 2);
+    resultContainer.classList.add("state-success");
+    resultMsg.innerText = `Missing side (hypotenuse) should be ${FormatSideValue(missing)}.`;
+    return;
+  }
+
+  if (triangleType === "equilateral") {
+    if (Math.abs(a - b) > epsilon) {
+      resultContainer.classList.add("state-error");
+      resultMsg.innerText = "For an equilateral triangle, the two given sides must be equal.";
+      return;
+    }
+
+    resultContainer.classList.add("state-success");
+    resultMsg.innerText = `Missing side should be ${FormatSideValue(a)}.`;
+    return;
+  }
+
+  if (triangleType === "isosceles") {
+    resultContainer.classList.add("state-success");
+
+    if (Math.abs(a - b) <= epsilon) {
+      resultMsg.innerText = `Missing side is not unique. It can be any value between 0 and ${FormatSideValue(2 * a)} except ${FormatSideValue(a)}.`;
+      return;
+    }
+
+    resultMsg.innerText = `Missing side can be ${FormatSideValue(a)} or ${FormatSideValue(b)}.`;
+    return;
+  }
+
+  resultContainer.classList.add("state-error");
+  resultMsg.innerText = "Please choose a valid triangle type.";
+}

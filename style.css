@@ -196,8 +196,77 @@ button:active {
     color: #9ca3af;
 }
 
+.secondary-section {
+    margin-top: 24px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 24px;
+}
+
+.secondary-section h2 {
+    font-size: 18px;
+    margin: 0 0 6px 0;
+}
+
+.secondary-section p {
+    margin: 0 0 16px 0;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.input-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 15px;
+    color: var(--text-main);
+    box-sizing: border-box;
+    background-color: var(--card-bg);
+}
+
+.input-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.mini-result {
+    margin-top: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    font-size: 14px;
+}
+
+.mini-result p {
+    margin: 0;
+}
+
+.mini-result.state-success {
+    background-color: var(--success-bg);
+    border-color: #bbf7d0;
+    color: var(--success-text);
+}
+
+.mini-result.state-error {
+    background-color: var(--error-bg);
+    border-color: #fecaca;
+    color: var(--error-text);
+}
+
 @media (max-width: 480px) {
     .input-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mini-grid {
         grid-template-columns: 1fr;
     }
 }
