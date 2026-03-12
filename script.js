@@ -22,6 +22,9 @@
  * @returns {void}
  */
 function TriangleMain() {
+  ClearMissingSideResult();
+  ClearMissingSideInputs();
+
   // Get input values from the form
   let s1 = document.getElementById("side1").value;
   let s2 = document.getElementById("side2").value;
@@ -270,7 +273,7 @@ function ShowResult(data) {
     // Right-angled triangles have priority over type classification
     if (data.isRight === true) {
       imgUrl =
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Triangle.Right.svg/640px-Triangle.Right.svg.png";
+        "https://upload.wikimedia.org/wikipedia/commons/7/72/Triangle.Right.svg";
     } else {
       // Map triangle types to their corresponding images
       switch (data.type) {
@@ -327,7 +330,48 @@ function FormatSideValue(value) {
   return Number(value.toFixed(4)).toString();
 }
 
+function ClearTriangleResult() {
+  const container = document.getElementById("result-container");
+  const badge = document.getElementById("result-badge");
+  const title = document.getElementById("triangle-type");
+  const subtitle = document.getElementById("right-angle-status");
+  const errorMsg = document.getElementById("error-msg");
+  const img = document.getElementById("triangle-img");
+
+  container.classList.add("hidden");
+  container.classList.remove("state-success", "state-error");
+  badge.innerText = "Result";
+  title.innerText = "";
+  subtitle.innerText = "";
+  errorMsg.innerText = "";
+  img.src = "";
+}
+
+function ClearTriangleInputs() {
+  document.getElementById("side1").value = "";
+  document.getElementById("side2").value = "";
+  document.getElementById("side3").value = "";
+}
+
+function ClearMissingSideResult() {
+  const resultContainer = document.getElementById("missing-result");
+  const resultMsg = document.getElementById("missing-msg");
+
+  resultContainer.classList.add("hidden");
+  resultContainer.classList.remove("state-success", "state-error");
+  resultMsg.innerText = "";
+}
+
+function ClearMissingSideInputs() {
+  document.getElementById("calc-side-a").value = "";
+  document.getElementById("calc-side-b").value = "";
+  document.getElementById("calc-type").value = "right";
+}
+
 function CalculateMissingSide() {
+  ClearTriangleResult();
+  ClearTriangleInputs();
+
   const sideAInput = document.getElementById("calc-side-a").value;
   const sideBInput = document.getElementById("calc-side-b").value;
   const triangleType = document.getElementById("calc-type").value;
